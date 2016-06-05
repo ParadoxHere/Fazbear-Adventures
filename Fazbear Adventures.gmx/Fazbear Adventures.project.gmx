@@ -12,6 +12,8 @@
     <sprites name="Solidss">
       <sprite>sprites\spr_solid</sprite>
     </sprites>
+    <sprite>sprites\spr_textbox</sprite>
+    <sprite>sprites\spr_textbox_background</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -28,16 +30,57 @@
     <scripts name="Controller">
       <script>scripts\get_input.gml</script>
     </scripts>
+    <scripts name="Textbox">
+      <scripts name="Dialogue">
+        <script>scripts\textbox_dialogue_set_font.gml</script>
+        <script>scripts\textbox_dialogue_pause.gml</script>
+        <script>scripts\textbox_dialogue_add.gml</script>
+        <script>scripts\textbox_dialogue_question.gml</script>
+        <script>scripts\textbox_dialogue_start.gml</script>
+      </scripts>
+      <scripts name="Command">
+        <script>scripts\textbox_commands.gml</script>
+        <script>scripts\textbox_check_command.gml</script>
+      </scripts>
+      <script>scripts\textbox_next_page.gml</script>
+    </scripts>
+    <scripts name="Draw">
+      <script>scripts\draw_set_align.gml</script>
+      <script>scripts\draw_set_defaults.gml</script>
+      <script>scripts\draw_text_twitch.gml</script>
+    </scripts>
+    <scripts name="View">
+      <script>scripts\view_shake.gml</script>
+      <script>scripts\view_focus.gml</script>
+      <script>scripts\view_focus_main.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <fonts name="GUI">
+      <font>fonts\fnt_gui_6</font>
+      <font>fonts\fnt_gui_12</font>
+      <font>fonts\fnt_gui_18</font>
+      <font>fonts\fnt_gui_24</font>
+      <font>fonts\fnt_gui_30</font>
+      <font>fonts\fnt_gui_36</font>
+      <font>fonts\fnt_gui_42</font>
+      <font>fonts\fnt_gui_48</font>
+    </fonts>
+  </fonts>
   <objects name="objects">
     <objects name="Solids">
       <object>objects\BaseSolid</object>
     </objects>
     <objects name="Controllers">
+      <object>objects\View</object>
       <object>objects\Input</object>
     </objects>
     <objects name="Player">
       <object>objects\Player</object>
+    </objects>
+    <objects name="Textbox">
+      <object>objects\BaseBox</object>
+      <object>objects\Textbox</object>
     </objects>
   </objects>
   <rooms name="rooms">
