@@ -25,38 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_follow_main = Player;
-view_follow = view_follow_main;
-view_follow_mouse = false;
-view_clamp = false;
+            <string>menu[0] = "NULL";
 
-view_shake_intensity = 0;
-view_shake_damping = .9;
+menu_script = -1;
 
-view_smooth = 1; // The bigger the number the more smooth it is
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>view_follow = view_follow_main;
+space = 64;
+mpos = 0;
 </string>
           </argument>
         </arguments>
@@ -79,25 +53,69 @@ view_smooth = 1; // The bigger the number the more smooth it is
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xTo, yTo;
-move_towards_point(mouse_x, mouse_y, 0);
-xTo = view_follow.x + (lengthdir_x(min(96, distance_to_point(mouse_x, mouse_y)), direction) * view_follow_mouse);
-yTo = view_follow.y + (lengthdir_y(min(96, distance_to_point(mouse_x, mouse_y)), direction) * view_follow_mouse);
+            <string>if(instance_exists(Textbox)) exit;
 
-x += (xTo - x) / view_smooth;
-y += (yTo - y) / view_smooth;
+var move = 0;
+move -= Input.up_pressed;
+move += Input.down_pressed;
 
-view_xview = -(view_wview / 2) + x;
-view_yview = -(view_hview / 2) + y;
-
-if(view_clamp) {
-    view_xview = clamp(view_xview, 0, room_width - view_wview);
-    view_yview = clamp(view_yview, 0, room_height - view_hview);
+if(move != 0) {
+    mpos += move;
+    audio_play_sound(snd_menu, 10, false);
+    if(mpos &gt; array_length_1d(menu) - 1) {
+        mpos = 0;
+    } else if (mpos &lt; 0) {
+        mpos = array_length_1d(menu) - 1;
+    }
 }
 
-view_xview += random_range(-view_shake_intensity, view_shake_intensity);
-view_yview += random_range(-view_shake_intensity, view_shake_intensity);
-view_shake_intensity *= view_shake_damping;
+var push;
+push = Input.select;
+if(push) {
+    audio_play_sound(snd_menu, 10, false);
+    if(menu_script != -1) {
+        script_execute(menu_script);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_set_align(fa_left, fa_top);
+draw_set_font(fnt_gui_12);
+draw_set_colour(c_white);
+
+for(var i = 0; i &lt; array_length_1d(menu); i++) {
+    if(mpos == i) {
+        draw_set_alpha(1);
+    } else {
+        draw_set_alpha(.3);
+    }
+    draw_text(x + space, y + (i * space), string(menu[i]));
+}
+
+draw_set_alpha(1);
+draw_text(x + 16, y + mpos * space, "&gt;");
+
+draw_set_defaults();
 </string>
           </argument>
         </arguments>

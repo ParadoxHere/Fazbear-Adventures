@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,15 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_follow_main = Player;
-view_follow = view_follow_main;
-view_follow_mouse = false;
-view_clamp = false;
-
-view_shake_intensity = 0;
-view_shake_damping = .9;
-
-view_smooth = 1; // The bigger the number the more smooth it is
+            <string>target = -1;
+a = 0;
+type = 1;
+fade_speed = .06;
+wait = room_speed * (1 / 5);
 </string>
           </argument>
         </arguments>
@@ -56,13 +52,17 @@ view_smooth = 1; // The bigger the number the more smooth it is
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_follow = view_follow_main;
+            <string>if(target != -1) {
+    room_goto(target);    
+}
+
+type = -1;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -79,25 +79,20 @@ view_smooth = 1; // The bigger the number the more smooth it is
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xTo, yTo;
-move_towards_point(mouse_x, mouse_y, 0);
-xTo = view_follow.x + (lengthdir_x(min(96, distance_to_point(mouse_x, mouse_y)), direction) * view_follow_mouse);
-yTo = view_follow.y + (lengthdir_y(min(96, distance_to_point(mouse_x, mouse_y)), direction) * view_follow_mouse);
+            <string>a += fade_speed * type;
 
-x += (xTo - x) / view_smooth;
-y += (yTo - y) / view_smooth;
-
-view_xview = -(view_wview / 2) + x;
-view_yview = -(view_hview / 2) + y;
-
-if(view_clamp) {
-    view_xview = clamp(view_xview, 0, room_width - view_wview);
-    view_yview = clamp(view_yview, 0, room_height - view_hview);
+if(a &gt;= 1) {
+    if(alarm[0] == -1) {
+        alarm[0] = wait;
+    }
+} else if(a &lt;= 0 &amp;&amp; type == -1) {
+    instance_destroy();
 }
 
-view_xview += random_range(-view_shake_intensity, view_shake_intensity);
-view_yview += random_range(-view_shake_intensity, view_shake_intensity);
-view_shake_intensity *= view_shake_damping;
+draw_set_colour(c_black);
+draw_set_alpha(a);
+draw_rectangle(0, 0, display_get_gui_width(), display_get_gui_height(), false);
+draw_set_defaults();
 </string>
           </argument>
         </arguments>

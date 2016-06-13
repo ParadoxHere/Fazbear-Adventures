@@ -4,7 +4,9 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_menu</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\spr_foxy_funtime</sprite>
@@ -50,11 +52,18 @@
       <script>scripts\draw_set_align.gml</script>
       <script>scripts\draw_set_defaults.gml</script>
       <script>scripts\draw_text_twitch.gml</script>
+      <script>scripts\draw_title.gml</script>
     </scripts>
     <scripts name="View">
       <script>scripts\view_shake.gml</script>
       <script>scripts\view_focus.gml</script>
       <script>scripts\view_focus_main.gml</script>
+    </scripts>
+    <scripts name="Menu">
+      <script>scripts\menu_main.gml</script>
+    </scripts>
+    <scripts name="Fade">
+      <script>scripts\room_fadeto.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -84,10 +93,19 @@
       <object>objects\BaseBox</object>
       <object>objects\Textbox</object>
     </objects>
+    <objects name="Main Menu">
+      <object>objects\MenuParent</object>
+      <object>objects\MainMenu</object>
+    </objects>
+    <objects name="Other">
+      <object>objects\Fade</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_test</room>
+    <room>rooms\rm_shutdown</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
