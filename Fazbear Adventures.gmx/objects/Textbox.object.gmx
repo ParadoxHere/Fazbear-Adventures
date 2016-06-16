@@ -148,13 +148,13 @@ draw_sprite(spr_textbox, br, xx + (image_xscale * size) - size, yy + (image_ysca
 textbox_check_command();
 
 if(text_count &lt;= string_length(text_current)) {
-    if(Input.interact) {
+    if(Input.select) {
         text_count = string_length(text_current); 
     }
     text_visible = string_copy(text_current, 0, text_count);
     text_count++;
 } else {
-    if(Input.interact) {
+    if(Input.select) {
         textbox_next_page();
     }
 }
