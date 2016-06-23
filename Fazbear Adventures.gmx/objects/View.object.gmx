@@ -28,7 +28,7 @@
             <string>view_follow_main = Player;
 view_follow = view_follow_main;
 view_follow_mouse = false;
-view_clamp = false;
+view_clamp = true;
 
 view_shake_intensity = 0;
 view_shake_damping = .9;

@@ -9,17 +9,18 @@
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
-      <sprite>sprites\spr_foxy_funtime</sprite>
-    </sprites>
-    <sprites name="Solidss">
-      <sprite>sprites\spr_solid</sprite>
+      <sprite>sprites\spr_player</sprite>
     </sprites>
     <sprites name="Textbox">
       <sprite>sprites\spr_textbox</sprite>
       <sprite>sprites\spr_textbox_background</sprite>
     </sprites>
     <sprites name="Other">
+      <sprite>sprites\spr_foxy_funtime</sprite>
       <sprite>sprites\spr_splash</sprite>
+      <sprite>sprites\spr_room_start</sprite>
+      <sprite>sprites\spr_room_move</sprite>
+      <sprite>sprites\spr_collision</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -67,6 +68,46 @@
     </scripts>
     <scripts name="Fade">
       <script>scripts\room_fadeto.gml</script>
+      <script>scripts\room_fadeto_next.gml</script>
+      <script>scripts\room_fadeto_previous.gml</script>
+    </scripts>
+    <scripts name="Gamejolt">
+      <script>scripts\gj_init.gml</script>
+      <script>scripts\gj_result_id.gml</script>
+      <script>scripts\gj_result_status.gml</script>
+      <script>scripts\gj_result_error.gml</script>
+      <script>scripts\gj_result_data_count.gml</script>
+      <script>scripts\gj_result_data_field.gml</script>
+      <script>scripts\gj_result_data_field_num.gml</script>
+      <script>scripts\gj_result_clear.gml</script>
+      <script>scripts\gj_user_login.gml</script>
+      <script>scripts\gj_user_logout.gml</script>
+      <script>scripts\gj_user_isloggedin.gml</script>
+      <script>scripts\gj_user_username.gml</script>
+      <script>scripts\gj_user_info_fromusername.gml</script>
+      <script>scripts\gj_user_info_fromuserid.gml</script>
+      <script>scripts\gj_session_open.gml</script>
+      <script>scripts\gj_session_ping.gml</script>
+      <script>scripts\gj_session_close.gml</script>
+      <script>scripts\gj_trophy_get.gml</script>
+      <script>scripts\gj_trophy_get_id.gml</script>
+      <script>scripts\gj_trophy_add.gml</script>
+      <script>scripts\gj_scores_add.gml</script>
+      <script>scripts\gj_scores_add_guest.gml</script>
+      <script>scripts\gj_scores_get.gml</script>
+      <script>scripts\gj_scores_get_user.gml</script>
+      <script>scripts\gj_scores_tables.gml</script>
+      <script>scripts\gj_datastore_set_global.gml</script>
+      <script>scripts\gj_datastore_set_user.gml</script>
+      <script>scripts\gj_datastore_remove_global.gml</script>
+      <script>scripts\gj_datastore_remove_user.gml</script>
+      <script>scripts\gj_datastore_get_global.gml</script>
+      <script>scripts\gj_datastore_get_user.gml</script>
+      <script>scripts\gj_datastore_keys_global.gml</script>
+      <script>scripts\gj_datastore_keys_user.gml</script>
+      <script>scripts\gj_datastore_update_global.gml</script>
+      <script>scripts\gj_datastore_update_user.gml</script>
+      <script>scripts\gj_user_autologin.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -82,9 +123,6 @@
     </fonts>
   </fonts>
   <objects name="objects">
-    <objects name="Solids">
-      <object>objects\BaseSolid</object>
-    </objects>
     <objects name="Controllers">
       <object>objects\View</object>
       <object>objects\Input</object>
@@ -104,12 +142,20 @@
       <object>objects\Splash</object>
       <object>objects\Fade</object>
     </objects>
+    <objects name="Room">
+      <object>objects\RoomMove</object>
+      <object>objects\RoomStartPoint</object>
+      <object>objects\RoomSolid</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_splash</room>
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_test</room>
+    <rooms name="Game">
+      <room>rooms\rm_test</room>
+      <room>rooms\rm_test2</room>
+    </rooms>
     <room>rooms\rm_shutdown</room>
   </rooms>
   <help>
